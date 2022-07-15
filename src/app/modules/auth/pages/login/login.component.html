@@ -1,0 +1,40 @@
+<div class="login-page">
+  <div class="login-container">
+    <h1 class="heading">Hospital Management Suite</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)">
+      <mat-error
+      *ngIf="
+        loginForm.controls['email'].hasError('email') &&
+        !loginForm.controls['email'].hasError('required')
+      "
+      >Please enter a valid Email</mat-error
+    >
+
+    <mat-error
+      *ngIf="
+        loginForm.controls['email'].hasError('required') &&
+        loginForm.controls['email'].dirty
+      "
+    >
+      Email is required</mat-error
+    >
+
+      <app-input type="email" label="Email" formControlName="email"></app-input>
+
+
+      <app-input
+        type="password"
+        label="Password"
+        formControlName="password"
+      ></app-input>
+
+
+
+
+
+      <div class="login-btn">
+        <app-button [isDisabled]="loginForm.invalid"> Login </app-button>
+      </div>
+    </form>
+  </div>
+</div>

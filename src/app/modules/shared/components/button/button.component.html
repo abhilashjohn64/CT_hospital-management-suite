@@ -1,4 +1,4 @@
-<button appHighlight mat-raised-button color="primary" class="submit-btn" type="submit" (click)="onClick()">
+<button [disabled]="isDisabled" appHighlight mat-raised-button color="primary" class="submit-btn" type="submit" (click)="onClick()">
   <ng-content></ng-content>
 </button>
 

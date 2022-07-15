@@ -1,0 +1,20 @@
+<div class="side-nav">
+  <div class="user-info">
+    <img
+      class="user-image"
+      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Flucid-generic%2F24%2FUser_person_avtar_profile_picture_dp-512.png&f=1&nofb=1"
+      alt="dp"
+    />
+    <h3 class="user-info-title">{{ navBarData.name }}</h3>
+    <h4 class="user-info-title">{{ navBarData.designation }}</h4>
+  </div>
+
+  <ul class="menu-container">
+    <app-menu-item
+      *ngFor="let menuItem of navBarData.menuItems"
+      [matIconType]="menuItem.matIconType"
+      (click)="onClick(menuItem.path)"
+      >{{ menuItem.title }}</app-menu-item
+    >
+  </ul>
+</div>

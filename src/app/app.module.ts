@@ -5,7 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
-
+import { httpInterceptorProviders } from './interceptors/httpInterceptorProvider';
+import { NgToastModule } from 'ng-angular-popup'
+import { HttpClientModule } from '@angular/common/http';
+import { GuardService } from './modules/shared/services/guard.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,9 +17,11 @@ import { SharedModule } from './modules/shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    NgToastModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders, GuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

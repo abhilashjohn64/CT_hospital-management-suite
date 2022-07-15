@@ -1,0 +1,12 @@
+.title{
+  margin: 0;
+}
+.main-container{
+  display: flex;
+  .side-nav{
+    flex:2
+  }
+  .content{
+    flex:8
+  }
+}

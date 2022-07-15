@@ -22,9 +22,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = '';
   @Input() placeholder: string = '';
 
-  @Input() isValid: boolean = true;
-  @Input() isEmpty: boolean = false;
-
   inputValue: string = ""
 
   constructor() {}
@@ -34,7 +31,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
-    console.log(this.inputValue)
   }
 
   registerOnTouched(fn: any): void {}

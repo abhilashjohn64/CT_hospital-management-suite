@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { HighlightDirective } from './directives/highlight.directive';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { TokenService } from './services/token.service';
 
 
 @NgModule({
@@ -17,7 +20,9 @@ import { HighlightDirective } from './directives/highlight.directive';
     InputComponent,
     HeaderComponent,
     HighlightDirective,
-    AlertDialogComponent
+    AlertDialogComponent,
+    MenuItemComponent,
+    SideNavComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +42,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     ReactiveFormsModule,
     MatIconModule,
     HeaderComponent,
-    AlertDialogComponent
+    AlertDialogComponent,
+    SideNavComponent,
   ]
 })
 export class SharedModule { }

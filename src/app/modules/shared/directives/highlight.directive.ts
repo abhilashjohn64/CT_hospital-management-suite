@@ -6,16 +6,17 @@ import { Directive, HostBinding, HostListener, OnInit } from '@angular/core';
 export class HighlightDirective implements OnInit {
   constructor() {}
   ngOnInit(): void {
-    this.resetColor();
+    this.backgroundColor = '#080808';
+    this.textColor = 'white';
   }
-  
+
   resetColor() {
-    this.backgroundColor = 'indigo';
-    this.color = 'white';
+    this.backgroundColor = this.backgroundColor === '#080808' ? 'white' : '#080808';
+    this.textColor = this.textColor === 'white'? "#080808" :'white'
   }
 
   @HostBinding('style.backgroundColor') backgroundColor: string = '';
-  @HostBinding('style.color') color: string = '';
+  @HostBinding('style.color') textColor: string = '';
 
   @HostListener('mouseleave')
   setMouseLeave() {
@@ -24,9 +25,9 @@ export class HighlightDirective implements OnInit {
 
   @HostListener('mouseenter')
   setMouseEnter() {
-    this.backgroundColor = 'white';
-    this.color = 'indigo';
+    this.resetColor();
   }
 
-  
+
+
 }

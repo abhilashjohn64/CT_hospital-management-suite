@@ -1,0 +1,22 @@
+.title{
+  margin: 0;
+}
+.main-container{
+  display: flex;
+  .side-nav{
+    flex:2
+  }
+  .content{
+    flex:8;
+    padding: 1rem;
+    .operations{
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+    .table{
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+}
