@@ -10,6 +10,7 @@ import { RequestsComponent } from './pages/requests/requests.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -23,7 +24,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AdminRoutingModule,
     SharedModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HttpClientModule
   ]
 })
 export class AdminModule { }

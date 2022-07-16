@@ -5,18 +5,23 @@ import { TokenService } from '../modules/shared/services/token.service';
 
 @Injectable()
 export class HeadersInterceptorService implements  HttpInterceptor {
-
+  private authToken:string = "";
   constructor(
     private tokenService : TokenService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler){
-    req = req.clone({ headers: req.headers.set('Content-Type', 'application/json')});
-    req = req.clone({ headers: req.headers.set('Auth', getToken())});
-    console.log(req)
-    return next.handle(req)
+    this.getToken();
+    req = req.clone({ headers: req.headers.append('Content-Type', 'application/json')});
+    let tokenizedRequest = req.clone({
+      headers:req.headers.append('Authorization',`${this.authToken}`)
+    })
+    return next.handle(tokenizedRequest)
   }
+  private getToken(){
+    let token = localStorage.getItem('token');
+    if(token){
+    this.authToken = token;
+    }
+  }
+}
 
-}
-function getToken() :string{
-  return window.localStorage.getItem("token") || ""
-}
 

@@ -24,10 +24,7 @@ export class AlertDialogComponent implements OnInit {
   onConfirm(){
     this.dialogRef.close(true);
   }
-
 }
-
-
 
 interface IAlertDialogData {
   dialogTitle: string,

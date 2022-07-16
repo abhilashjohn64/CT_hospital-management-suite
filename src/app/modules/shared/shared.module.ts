@@ -12,6 +12,8 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TokenService } from './services/token.service';
+import { SelectComponent } from './components/select/select.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { TokenService } from './services/token.service';
     AlertDialogComponent,
     MenuItemComponent,
     SideNavComponent,
+    SelectComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { TokenService } from './services/token.service';
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatSelectModule
   ],
   exports:[
     ButtonComponent,
@@ -44,6 +48,7 @@ import { TokenService } from './services/token.service';
     HeaderComponent,
     AlertDialogComponent,
     SideNavComponent,
+    SelectComponent
   ]
 })
 export class SharedModule { }
