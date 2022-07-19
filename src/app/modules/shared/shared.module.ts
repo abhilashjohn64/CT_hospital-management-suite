@@ -12,8 +12,10 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TokenService } from './services/token.service';
-import { SelectComponent } from './components/select/select.component';
 import {MatSelectModule} from '@angular/material/select';
+import { CustomInputComponent } from './components/custom-input/custom-input.component';
+import { InputDialogComponent } from './components/input-dialog/input-dialog.component';
+import { CustomMatIconComponent } from './components/custom-mat-icon/custom-mat-icon.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {MatSelectModule} from '@angular/material/select';
     AlertDialogComponent,
     MenuItemComponent,
     SideNavComponent,
-    SelectComponent,
+    CustomInputComponent,
+    InputDialogComponent,
+    CustomMatIconComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +52,9 @@ import {MatSelectModule} from '@angular/material/select';
     HeaderComponent,
     AlertDialogComponent,
     SideNavComponent,
-    SelectComponent
+    CustomInputComponent,
+    InputDialogComponent,
+    CustomMatIconComponent
   ]
 })
 export class SharedModule { }

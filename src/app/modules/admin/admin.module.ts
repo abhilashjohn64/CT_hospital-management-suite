@@ -11,6 +11,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     MatTableModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ]
 })
 export class AdminModule { }

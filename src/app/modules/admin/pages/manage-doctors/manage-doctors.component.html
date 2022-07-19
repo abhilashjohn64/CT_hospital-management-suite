@@ -7,7 +7,7 @@
     <div class="mat-elevation-z8">
       <div class="operations">
         <h2>List of Doctors</h2>
-        <app-button (buttonClick)="createDoctor()" class="add-btn"
+        <app-button (buttonClick)="onCreateDoctor()" class="add-btn"
           >Add Doctor</app-button
         >
       </div>
@@ -37,12 +37,8 @@
         <ng-container matColumnDef="operations">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let user" class="operations">
-            <button class="operations-btn" (click)="updateDoctor()">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button class="operations-btn" (click)="updateDoctor()">
-              <mat-icon>delete_outline</mat-icon>
-            </button>
+            <app-custom-mat-icon (click)="onUpdateDoctor(user)">edit</app-custom-mat-icon>
+            <app-custom-mat-icon (click)="deleteDoctor(user._id)">delete_outline</app-custom-mat-icon>
           </td>
         </ng-container>
 

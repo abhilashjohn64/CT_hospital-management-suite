@@ -13,6 +13,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
       canLoad : [GuardService]
+      
   },
   {
     path: 'doctor',

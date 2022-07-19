@@ -1,0 +1,18 @@
+<div class="login-operations">
+  <mat-icon (click)="onCancel()" class="close-btn">close</mat-icon>
+  <h3>{{dialogData.dialogTitle}}</h3>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)" >
+
+      <app-custom-input *ngFor=" let input of inputAttributes "
+      [formControlName] = "input.label"
+      [inputAttributes] = "input"
+      >
+    </app-custom-input>
+
+    <div class="login-btn">
+      <app-button *ngIf="form.valid">
+        {{dialogData.buttonType}}
+      </app-button>
+    </div>
+  </form>
+</div>

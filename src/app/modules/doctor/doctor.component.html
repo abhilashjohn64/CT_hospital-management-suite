@@ -1,2 +1,11 @@
 <p>doctor xzx works!</p>
-<app-select></app-select>
+<form [formGroup]="form">
+  <app-custom-input  [formControlName]="data.label" [inputAttributes]="data">
+  </app-custom-input >
+</form>
+
+
+<p>{{form.value | json}}</p>
+
+
+<app-custom-mat-icon (click)="onClick()">edit</app-custom-mat-icon>

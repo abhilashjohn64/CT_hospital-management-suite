@@ -1,0 +1,37 @@
+<mat-form-field appearance="outline" *ngIf="inputAttributes.type==='select'">
+  <mat-label>{{inputAttributes.label}}</mat-label>
+  <mat-select [value]="previousOptions" (valueChange)="onChange($event)" multiple *ngIf="inputAttributes.isMultiSelect" >
+    <mat-option *ngFor="let option of inputAttributes.options" [value]="option._id">{{option.name}}</mat-option>
+  </mat-select>
+
+  <mat-select [value]="previousOptions"  *ngIf="!inputAttributes.isMultiSelect">
+    <mat-option *ngFor="let option of inputAttributes.options " [value]="option._id">{{option.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="example-form" *ngIf="inputAttributes.type !=='select'">
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>{{ inputAttributes.label }}</mat-label>
+    <input
+      matInput
+      [type]="inputAttributes.type !== 'password' ? inputAttributes.type : hide ? 'password' : 'text'"
+      [placeholder] ="placeholder"
+      [ngModel]="previousValue"
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="onChange($event)"
+    />
+
+    <button
+      *ngIf="inputAttributes.type=== 'password'"
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+
+    </button>
+  </mat-form-field>
+</div>
+

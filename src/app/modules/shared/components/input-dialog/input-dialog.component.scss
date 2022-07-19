@@ -1,0 +1,15 @@
+.login-operations{
+  grid-column: 2/3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: snow;
+  .close-btn{
+    align-self: flex-end;
+  }
+  .login-btn{
+    text-align: center;
+  }
+
+}
