@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminService } from '../../services/admin.service';
 import { IUserData } from 'src/app/modules/shared/models/userDataInterface';
+import { IChangeRequests } from '../../models/createUserInterface';
 
 @Component({
   selector: 'app-requests',
@@ -12,21 +13,21 @@ import { IUserData } from 'src/app/modules/shared/models/userDataInterface';
   styleUrls: ['./requests.component.scss'],
 })
 export class RequestsComponent implements OnInit {
-  displayedColumns: string[] = ['doctor-name', 'nurses', 'operations'];
-  dataSource!: MatTableDataSource<IUserData>;
+  displayedColumns: string[] = ['from','reason','change','replacement'];
+  dataSource!: MatTableDataSource<IChangeRequests[]>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private adminService: AdminService) {}
 
-  getDoctors() {
-    this.adminService.getUsers().subscribe((response) => {
-      this.dataSource = new MatTableDataSource<IUserData>(
-        Object(response).data.filter(
-          (user: IUserData) => user.role === '62cd75655853a5d2c643dbab'
-        )
+  getRequests() {
+    this.adminService.getChangeRequest().subscribe((response) => {
+      console.log(response.data)
+      this.dataSource = new MatTableDataSource<IChangeRequests[]>(
+        Object(response).data
       );
-      this.dataSource.paginator = this.paginator;
       console.log(this.dataSource);
+      this.dataSource.paginator = this.paginator;
+
     });
   }
 
@@ -46,7 +47,7 @@ export class RequestsComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.getDoctors();
+    this.getRequests();
   }
   createDoctor() {}
   deleteDoctor() {}

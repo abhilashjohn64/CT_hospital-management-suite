@@ -1,0 +1,37 @@
+.title{
+  margin: 0;
+}
+.main-container{
+  display: flex;
+  .side-nav{
+    flex:2
+  }
+  .content{
+    flex:8;
+    padding: 1rem;
+    .operations{
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      .add-btn{
+        text-align: right;
+      }
+    }
+
+    .table{
+      width: 100%;
+      padding: 1rem;
+      .operations{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: center;
+        .operations-btn{
+          border: 0;
+          background-color: transparent;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

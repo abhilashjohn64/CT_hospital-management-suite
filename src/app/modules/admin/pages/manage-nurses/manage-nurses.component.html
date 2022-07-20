@@ -7,7 +7,7 @@
     <div class="mat-elevation-z8">
       <div class="operations">
         <h2>List of Nurses</h2>
-        <app-button (buttonClick)="createNurse()" class="add-btn"
+        <app-button (buttonClick)="onCreateNurse()" class="add-btn"
           >Add Nurse</app-button
         >
       </div>
@@ -21,7 +21,7 @@
 
         <!-- Doctor Column -->
         <ng-container matColumnDef="doctor">
-          <th mat-header-cell *matHeaderCellDef>Doctor Assigned To</th>
+          <th mat-header-cell *matHeaderCellDef>Assigned Doctor</th>
           <td mat-cell *matCellDef="let user">
             {{user.assignedDoctor[0]?.name || ""}}
           </td>
@@ -31,8 +31,8 @@
         <ng-container matColumnDef="operations">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let user" class="operations">
-            <app-custom-mat-icon (click)="updateNurse()">edit</app-custom-mat-icon>
-            <app-custom-mat-icon (click)="deleteNurse(user._id)">delete_outline</app-custom-mat-icon>
+            <app-custom-mat-icon (click)="onUpdateNurse(user)">edit</app-custom-mat-icon>
+            <app-custom-mat-icon (click)="onDeleteNurse(user._id)">delete_outline</app-custom-mat-icon>
           </td>
         </ng-container>
 

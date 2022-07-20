@@ -11,7 +11,9 @@ import { AlertDialogComponent } from 'src/app/modules/shared/components/alert-di
 import { IInputDialogInput } from 'src/app/modules/shared/models/inputDialogInterface';
 import { Validators } from '@angular/forms';
 import { IOptionsFormat } from 'src/app/modules/shared/models/customInputInterface';
-import {}
+import { InputDialogComponent } from 'src/app/modules/shared/components/input-dialog/input-dialog.component';
+import { ICreateUserData, IUpdateUserData } from '../../models/createUserInterface';
+
 @Component({
   selector: 'app-manage-nurses',
   templateUrl: './manage-nurses.component.html',
@@ -36,13 +38,7 @@ export class ManageNursesComponent implements OnInit {
     });
   }
 
-  // getDoctor(){
-  //   this.adminService.getNurses().subscribe(response =>{
-  //     response.data.map(doctor =>{
-  //       console.log(doctor)
-  //     })
-  //   })
-  // }
+
 
   navBarData: INavBarDetails = {
     name: window.localStorage.getItem('name') || '',
@@ -63,19 +59,50 @@ export class ManageNursesComponent implements OnInit {
     this.getNurse();
   }
   getDoctor(){
-
+    this.doctorsList = []
+    this.adminService.getUsers().subscribe(response =>{
+      for(let user of response.data){
+        console.log(user.role===environment.roles.find(role=>role.title === "Doctor")?.roleId)
+        if(user.role === environment.roles.find(role=>role.title === "Doctor")?.roleId)
+        this.doctorsList.push({
+          _id: user["_id"],
+          name : user["name"]
+        })
+      }
+    })
+    return this.doctorsList;
   }
-  createNurse() {
-    const dialogRef = this.dialog.open(AlertDialogComponent, {
+
+  createNurse(userData: ICreateUserData) {
+    this.adminService.createUser(userData).subscribe((response) => {
+      if (response) {
+        this.getNurse();
+      }
+    });
+  }
+
+
+  onCreateNurse() {
+    this.dialogContentData.dialogTitle = 'Create Nurse';
+    this.dialogContentData.buttonType = 'Create';
+    const dialogRef = this.dialog.open(InputDialogComponent, {
       width: '300px',
-      data: { dialogTitle: 'Delete Doctor', dialogContent: 'Are you sure ?' },
+      data: this.dialogContentData,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result)
+      if (result) {
+        result.assignedDoctor? result:  result.assignedDoctor = null
+        result['role'] = environment.roles.find(
+          (role) => role.title === 'Nurse'
+        )?.roleId;
+        this.createNurse(result);
+      }
     });
   }
-  deleteNurse(id:string) {
+
+
+  onDeleteNurse(id:string) {
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       width: '300px',
       data: { dialogTitle: 'Delete Nurse', dialogContent: 'Are you sure ?' },
@@ -90,7 +117,39 @@ export class ManageNursesComponent implements OnInit {
     });
   }
 
-  updateNurse() {}
+  updateUser( id : string, userUpdatedData:IUpdateUserData){
+    this.adminService.updateUser(id,userUpdatedData).subscribe(response =>{
+      if(response){
+        this.getNurse();
+      }
+    })
+  }
+  onUpdateNurse(userData: IUserData) {
+
+    this.dialogContentData.dialogTitle = 'Update Nurse';
+    this.dialogContentData.buttonType = 'Update';
+    this.dialogContentData.alertInputAttributes[0]['initialValue'] =
+      userData.name;
+    this.dialogContentData.alertInputAttributes[1]['initialValue'] =
+      userData.email;
+    this.dialogContentData.alertInputAttributes[2]['initialValue'] =
+      userData.assignedDoctor?.map((doctor) => {
+        return { _id: doctor['_id'], name: doctor['name'] };
+      });
+
+    const dialogRef = this.dialog.open(InputDialogComponent, {
+      width: '300px',
+      data: this.dialogContentData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        result.assignedDoctor.length? result: result.assignedDoctor = null
+        this.updateUser( userData._id, result);
+      }
+    });
+  }
+
 
 
   dialogContentData: IInputDialogInput = {
@@ -110,7 +169,7 @@ export class ManageNursesComponent implements OnInit {
       {
         type: 'select',
         label: 'assignedDoctor',
-        // options: this.getNursesWithAssigned(false),
+        options: this.getDoctor(),
         isMultiSelect: true,
       },
     ],

@@ -11,23 +11,13 @@ import { IUserData } from 'src/app/modules/shared/models/userDataInterface';
   styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
-  displayedColumns: string[] = ['doctor-name', 'nurses', 'operations'];
+  displayedColumns: string[] = [];
   dataSource!: MatTableDataSource<IUserData>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private adminService: AdminService) {}
 
-  getDoctors() {
-    this.adminService.getUsers().subscribe((response) => {
-      this.dataSource = new MatTableDataSource<IUserData>(
-        Object(response).data.filter(
-          (user: IUserData) => user.role === '62cd75655853a5d2c643dbab'
-        )
-      );
-      this.dataSource.paginator = this.paginator;
-      console.log(this.dataSource);
-    });
-  }
+
 
   navBarData: INavBarDetails = {
     name: window.localStorage.getItem('name') || '',
@@ -45,9 +35,5 @@ export class NotificationsComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.getDoctors();
   }
-  createDoctor() {}
-  deleteDoctor() {}
-  updateDoctor() {}
 }

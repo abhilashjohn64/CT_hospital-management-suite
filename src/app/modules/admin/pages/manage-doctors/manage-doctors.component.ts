@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { INavBarDetails } from 'src/app/modules/shared/models/navBarInterface';
-import { AfterViewInit, ViewChild } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminService } from '../../services/admin.service';
@@ -13,6 +13,7 @@ import { Validators } from '@angular/forms';
 import { ICreateUserData, IUpdateUserData } from '../../models/createUserInterface';
 import { IInputDialogInput } from 'src/app/modules/shared/models/inputDialogInterface';
 import { IOptionsFormat } from 'src/app/modules/shared/models/customInputInterface';
+
 @Component({
   selector: 'app-manage-doctors',
   templateUrl: './manage-doctors.component.html',
@@ -161,5 +162,31 @@ export class ManageDoctorsComponent implements OnInit {
     });
   }
 
-  
+  dialogContentData: IInputDialogInput = {
+    dialogTitle: '',
+    buttonType: '',
+    alertInputAttributes: [
+      {
+        type: 'text',
+        label: 'name',
+        validation: [Validators.required, Validators.minLength(4)],
+      },
+      {
+        type: 'text',
+        label: 'speciality',
+        validation: [Validators.required, Validators.minLength(2)],
+      },
+      {
+        type: 'email',
+        label: 'email',
+        validation: [Validators.required, Validators.email],
+      },
+      {
+        type: 'select',
+        label: 'nurses',
+        options: this.getNursesWithAssigned(false),
+        isMultiSelect: true,
+      },
+    ],
+  };
 }

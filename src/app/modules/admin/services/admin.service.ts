@@ -46,4 +46,7 @@ export class AdminService  {
     return this.patch(`user/${id}`,userData)
   }
 
+  getChangeRequest() : Observable<any>{
+    return this.get(`change-request`)
+  }
 }

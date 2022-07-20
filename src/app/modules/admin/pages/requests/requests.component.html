@@ -6,31 +6,36 @@
   <div class="content">
     <div class="mat-elevation-z8">
       <div class="operations">
-        <h2>List of Doctors</h2>
-        <app-button (buttonClick)="createDoctor()" class="add-btn"
-          >Add Doctor</app-button
-        >
+        <h2>List of Change Requests</h2>
       </div>
 
       <table mat-table [dataSource]="dataSource" class="table">
-        <!-- Doctor Column -->
-        <ng-container matColumnDef="doctor-name">
-          <th mat-header-cell *matHeaderCellDef>Doctor Name</th>
-          <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+        <!-- From Column -->
+        <ng-container matColumnDef="from">
+          <th mat-header-cell *matHeaderCellDef>From</th>
+          <td mat-cell *matCellDef="let request">{{ request.from[0].name }}</td>
         </ng-container>
 
-        <!-- Nurses Column -->
-        <ng-container matColumnDef="nurses">
-          <th mat-header-cell *matHeaderCellDef>Nurses Assigned</th>
-          <td mat-cell *matCellDef="let user">
-            <ul>
-              <li *ngFor="let nurse of user.nurses">{{ nurse.name }}</li>
-            </ul>
-          </td>
+        <!-- Reason Column -->
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef>Reason</th>
+          <td mat-cell *matCellDef="let request">{{ request.reason }}</td>
+        </ng-container>
+
+        <!-- change Column -->
+        <ng-container matColumnDef="change">
+          <th mat-header-cell *matHeaderCellDef>Change</th>
+          <td mat-cell *matCellDef="let request">{{ request.for[0].name }}</td>
+        </ng-container>
+
+        <!-- replacement Column -->
+        <ng-container matColumnDef="replacement">
+          <th mat-header-cell *matHeaderCellDef>Replacement</th>
+          <td mat-cell *matCellDef="let request">{{ request.replacement[0].name}}</td>
         </ng-container>
 
         <!-- Operations Column -->
-        <ng-container matColumnDef="operations">
+        <!-- <ng-container matColumnDef="operations">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let user" class="operations">
             <button class="operations-btn" (click)="updateDoctor()">
@@ -40,7 +45,7 @@
               <mat-icon>delete_outline</mat-icon>
             </button>
           </td>
-        </ng-container>
+        </ng-container> -->
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
