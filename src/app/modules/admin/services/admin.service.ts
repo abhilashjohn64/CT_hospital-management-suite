@@ -49,4 +49,7 @@ export class AdminService  {
   getChangeRequest() : Observable<any>{
     return this.get(`change-request`)
   }
+  updateRequest(id: string, change: any) :Observable<any>{
+    return this.patch(`change-request/${id}`,change)
+  }
 }

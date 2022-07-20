@@ -47,5 +47,6 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
     else if(this.inputAttributes.initialValue){
       this.previousOptions = this.inputAttributes.initialValue?.map(initial=>initial._id)
     }
+
   }
 }

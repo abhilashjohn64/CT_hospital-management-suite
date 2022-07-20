@@ -9,7 +9,12 @@ export const environment = {
     { title: 'Admin', roleId: '62d6482764edfa25d9e70725' , url : 'admin'},
     { title: 'Doctor', roleId: '62d6482764edfa25d9e70726', url: 'doctor' },
     { title: 'Nurse', roleId: '62d6482764edfa25d9e70727', url:"nurse" },
-  ]
+  ],
+  RequestStatus : {
+    'PENDING': '62d6482764edfa25d9e7072a',
+    'REJECTED': '62d6482764edfa25d9e7072b',
+    'APPROVED': '62d6482764edfa25d9e7072c'
+  }
 
 };
 

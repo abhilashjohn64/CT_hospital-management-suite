@@ -4,6 +4,18 @@
 <div class="main-container">
   <app-side-nav class="side-nav" [navBarData]="navBarData"></app-side-nav>
   <div class="content">
-    <h1>Send message</h1>
+    <h1>Send message to {{nurseDetails.assignedDoctor?.name}}</h1>
+    <section class="sender-section chat-interface">
+      <!-- <h2>You</h2> -->
+      <!-- <div id="sender-chat" class="chat">
+        <span class="right-side-chat">aaa</span>
+      </div> -->
+      <div class="chat-operations">
+        <form [formGroup]="form">
+          <app-input class="sender-input"  type="text" label="Message" formControlName="text"></app-input>
+          <app-button (click)="onSendMessage(form)">Send</app-button>
+        </form>
+      </div>
+  </section>
   </div>
 </div>

@@ -12,7 +12,10 @@ import { IInputDialogInput } from 'src/app/modules/shared/models/inputDialogInte
 import { Validators } from '@angular/forms';
 import { IOptionsFormat } from 'src/app/modules/shared/models/customInputInterface';
 import { InputDialogComponent } from 'src/app/modules/shared/components/input-dialog/input-dialog.component';
-import { ICreateUserData, IUpdateUserData } from '../../models/createUserInterface';
+import {
+  ICreateUserData,
+  IUpdateUserData,
+} from '../../models/createUserInterface';
 
 @Component({
   selector: 'app-manage-nurses',
@@ -20,25 +23,31 @@ import { ICreateUserData, IUpdateUserData } from '../../models/createUserInterfa
   styleUrls: ['./manage-nurses.component.scss'],
 })
 export class ManageNursesComponent implements OnInit {
-  doctorsList : IOptionsFormat[] = []
-  displayedColumns: string[] = ['nurse-name', 'doctor', 'operations'];
+  doctorsList: IOptionsFormat[] = [];
+  displayedColumns: string[] = [
+    'nurse-name',
+    'doctor',
+    'time',
+    'update-time',
+    'operations',
+  ];
   dataSource!: MatTableDataSource<IUserData>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private adminService: AdminService,  public dialog: MatDialog) {}
+  constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
   getNurse() {
     this.adminService.getUsers().subscribe((response) => {
       this.dataSource = new MatTableDataSource<IUserData>(
         Object(response).data.filter(
-          (user: IUserData) => user.role === environment.roles.find(role=>role.title === "Nurse")?.roleId
+          (user: IUserData) =>
+            user.role ===
+            environment.roles.find((role) => role.title === 'Nurse')?.roleId
         )
       );
       this.dataSource.paginator = this.paginator;
     });
   }
-
-
 
   navBarData: INavBarDetails = {
     name: window.localStorage.getItem('name') || '',
@@ -58,18 +67,24 @@ export class ManageNursesComponent implements OnInit {
   ngOnInit(): void {
     this.getNurse();
   }
-  getDoctor(){
-    this.doctorsList = []
-    this.adminService.getUsers().subscribe(response =>{
-      for(let user of response.data){
-        console.log(user.role===environment.roles.find(role=>role.title === "Doctor")?.roleId)
-        if(user.role === environment.roles.find(role=>role.title === "Doctor")?.roleId)
-        this.doctorsList.push({
-          _id: user["_id"],
-          name : user["name"]
-        })
+  getDoctor() {
+    this.doctorsList = [];
+    this.adminService.getUsers().subscribe((response) => {
+      for (let user of response.data) {
+        console.log(
+          user.role ===
+            environment.roles.find((role) => role.title === 'Doctor')?.roleId
+        );
+        if (
+          user.role ===
+          environment.roles.find((role) => role.title === 'Doctor')?.roleId
+        )
+          this.doctorsList.push({
+            _id: user['_id'],
+            name: user['name'],
+          });
       }
-    })
+    });
     return this.doctorsList;
   }
 
@@ -81,7 +96,6 @@ export class ManageNursesComponent implements OnInit {
     });
   }
 
-
   onCreateNurse() {
     this.dialogContentData.dialogTitle = 'Create Nurse';
     this.dialogContentData.buttonType = 'Create';
@@ -92,7 +106,7 @@ export class ManageNursesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        result.assignedDoctor? result:  result.assignedDoctor = null
+        result.assignedDoctor ? result : (result.assignedDoctor = null);
         result['role'] = environment.roles.find(
           (role) => role.title === 'Nurse'
         )?.roleId;
@@ -101,8 +115,7 @@ export class ManageNursesComponent implements OnInit {
     });
   }
 
-
-  onDeleteNurse(id:string) {
+  onDeleteNurse(id: string) {
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       width: '300px',
       data: { dialogTitle: 'Delete Nurse', dialogContent: 'Are you sure ?' },
@@ -110,32 +123,28 @@ export class ManageNursesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.adminService.deleteUser(id).subscribe(response=>{
+        this.adminService.deleteUser(id).subscribe((response) => {
           this.getNurse();
         });
       }
     });
   }
 
-  updateUser( id : string, userUpdatedData:IUpdateUserData){
-    this.adminService.updateUser(id,userUpdatedData).subscribe(response =>{
-      if(response){
+  updateUser(id: string, userUpdatedData: IUpdateUserData) {
+    this.adminService.updateUser(id, userUpdatedData).subscribe((response) => {
+      if (response) {
         this.getNurse();
       }
-    })
+    });
   }
   onUpdateNurse(userData: IUserData) {
-
     this.dialogContentData.dialogTitle = 'Update Nurse';
     this.dialogContentData.buttonType = 'Update';
     this.dialogContentData.alertInputAttributes[0]['initialValue'] =
       userData.name;
     this.dialogContentData.alertInputAttributes[1]['initialValue'] =
       userData.email;
-    this.dialogContentData.alertInputAttributes[2]['initialValue'] =
-      userData.assignedDoctor?.map((doctor) => {
-        return { _id: doctor['_id'], name: doctor['name'] };
-      });
+    this.dialogContentData.alertInputAttributes[2]['initialValue'] = [];
 
     const dialogRef = this.dialog.open(InputDialogComponent, {
       width: '300px',
@@ -144,13 +153,11 @@ export class ManageNursesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        result.assignedDoctor.length? result: result.assignedDoctor = null
-        this.updateUser( userData._id, result);
+        result.assignedDoctor.length ? result : (result.assignedDoctor = null);
+        this.updateUser(userData._id, result);
       }
     });
   }
-
-
 
   dialogContentData: IInputDialogInput = {
     dialogTitle: '',
@@ -170,8 +177,15 @@ export class ManageNursesComponent implements OnInit {
         type: 'select',
         label: 'assignedDoctor',
         options: this.getDoctor(),
-        isMultiSelect: true,
+        isMultiSelect: false,
       },
     ],
   };
 }
+
+
+
+
+
+
+

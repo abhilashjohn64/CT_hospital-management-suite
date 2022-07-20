@@ -35,3 +35,49 @@
     }
   }
 }
+
+
+.chat-interface{
+  padding:0.5rem;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  border: thin solid black;
+  margin:0.5rem;
+}
+
+.chat-operations{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btn{
+  background-color: #966aff;
+  color:white;
+  border:none;
+  border-radius:0.5rem;
+  padding:0.5rem;
+  cursor: pointer;
+}
+.chat-operations{
+  padding: 0.5rem;
+}
+.chat span{
+  border: thin solid black;
+  border-radius: 4px;
+  padding: 0.2rem;
+}
+.chat{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.right-side-chat{
+  align-self: flex-end;
+  background-color: #fff;
+
+}
+.sender-input{
+  width: 100%;
+}

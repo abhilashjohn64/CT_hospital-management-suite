@@ -9,7 +9,8 @@ import { ViewRequestComponent } from './pages/view-request/view-request.componen
 import { MessagesComponent } from './pages/messages/messages.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import {MatTableModule} from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     DoctorRoutingModule,
     SharedModule,
     MatPaginatorModule,
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    HttpClientModule,
     MatDialogModule
   ]
 })

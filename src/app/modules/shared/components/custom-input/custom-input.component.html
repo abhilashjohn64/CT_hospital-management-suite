@@ -4,7 +4,7 @@
     <mat-option *ngFor="let option of inputAttributes.options" [value]="option._id">{{option.name}}</mat-option>
   </mat-select>
 
-  <mat-select [value]="previousOptions"  *ngIf="!inputAttributes.isMultiSelect">
+  <mat-select [value]="previousOptions"  (valueChange)="onChange($event)" *ngIf="!inputAttributes.isMultiSelect">
     <mat-option *ngFor="let option of inputAttributes.options " [value]="option._id">{{option.name}}</mat-option>
   </mat-select>
 </mat-form-field>

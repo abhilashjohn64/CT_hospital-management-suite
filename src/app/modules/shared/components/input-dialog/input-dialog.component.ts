@@ -32,6 +32,8 @@ export class InputDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   onSubmit(userForm : FormGroup) {
+    console.log(userForm.value);
+
     if(userForm.valid) this.dialogRef.close(userForm.value);
     else this.dialogRef.close();
   }

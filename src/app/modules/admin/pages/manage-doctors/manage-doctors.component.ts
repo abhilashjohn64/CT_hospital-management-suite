@@ -24,6 +24,8 @@ export class ManageDoctorsComponent implements OnInit {
     'doctor-name',
     'speciality',
     'nurses',
+    "time",
+    'update-time',
     'operations',
   ];
   dataSource!: MatTableDataSource<IUserData>;

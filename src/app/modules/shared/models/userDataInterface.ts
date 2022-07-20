@@ -4,7 +4,7 @@ export interface IUserData {
   email: string;
   password?: string;
   role: string;
-  assignedDoctor?: IUserData[];
+  assignedDoctor?: IUserData;
   speciality?: string;
   nurses?: IUserData[];
   resetToken?: string;

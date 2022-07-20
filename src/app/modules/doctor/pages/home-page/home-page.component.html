@@ -8,12 +8,33 @@
       <div class="operations">
         <h2>Assigned Nurses</h2>
       </div>
-<!-- 
+
       <table mat-table [dataSource]="dataSource" class="table">
+        <!-- Assigned Nurses Column -->
+        <ng-container matColumnDef="nurse-name">
+          <th mat-header-cell *matHeaderCellDef>Assigned Nurses</th>
+          <td mat-cell *matCellDef="let nurse">{{ nurse.name }}</td>
+        </ng-container>
+
+        <!-- Assigned On Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let nurse">{{ nurse.email }}</td>
+        </ng-container>
+        <!-- Operations Column -->
+
+        <ng-container matColumnDef="operations">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let user" class="operations">
+            <app-custom-mat-icon (click)="onChangeRequest(user)"
+              >swap_horizontal_circle</app-custom-mat-icon
+            >
+          </td>
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table> -->
+      </table>
 
       <mat-paginator
         [pageSizeOptions]="[5, 10, 20]"

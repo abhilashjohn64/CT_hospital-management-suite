@@ -6,6 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AdminService } from '../../services/admin.service';
 import { IUserData } from 'src/app/modules/shared/models/userDataInterface';
 import { IChangeRequests } from '../../models/createUserInterface';
+import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from 'src/app/modules/shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-requests',
@@ -13,21 +16,28 @@ import { IChangeRequests } from '../../models/createUserInterface';
   styleUrls: ['./requests.component.scss'],
 })
 export class RequestsComponent implements OnInit {
-  displayedColumns: string[] = ['from','reason','change','replacement'];
+  displayedColumns: string[] = [
+    'from',
+    'reason',
+    'change',
+    'replacement',
+    'time',
+    'status',
+    'operations',
+  ];
   dataSource!: MatTableDataSource<IChangeRequests[]>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,public dialog: MatDialog) {}
 
   getRequests() {
     this.adminService.getChangeRequest().subscribe((response) => {
-      console.log(response.data)
+      console.log(response.data);
       this.dataSource = new MatTableDataSource<IChangeRequests[]>(
         Object(response).data
       );
       console.log(this.dataSource);
       this.dataSource.paginator = this.paginator;
-
     });
   }
 
@@ -48,8 +58,45 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRequests();
+    console.log();
+
   }
-  createDoctor() {}
-  deleteDoctor() {}
-  updateDoctor() {}
+  updateResponse(id: string, change: any): void {
+    console.log(change)
+    this.adminService.updateRequest(id, change).subscribe((response) => {
+      if (response) {
+        this.getRequests();
+      }
+    });
+  }
+
+  onAcceptRequest(id: string) {
+    const dialogRef = this.dialog.open(AlertDialogComponent, {
+      width: '300px',
+      data: { dialogTitle: 'Accept  Request', dialogContent: 'Are you sure ?' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.updateResponse(id,{
+          status : environment.RequestStatus.APPROVED
+        })
+      }
+    });
+  }
+  onRejectRequest(id: string) {
+
+    const dialogRef = this.dialog.open(AlertDialogComponent, {
+      width: '300px',
+      data: { dialogTitle: 'Reject  Request', dialogContent: 'Are you sure ?' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.updateResponse(id,{
+          status : environment.RequestStatus.REJECTED
+        })
+      }
+    });
+  }
 }
