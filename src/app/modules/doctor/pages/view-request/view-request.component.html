@@ -44,6 +44,17 @@
           <td mat-cell *matCellDef="let request">
             {{ request.status[0].title}}
           </td>
+
+        </ng-container>
+
+        <!-- Operations Column -->
+        <ng-container matColumnDef="operations">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let request" class="operations" >
+            <mat-icon (click)="sendRemainer(request._id)"
+            *ngIf="request.status[0]._id === '62d6482764edfa25d9e7072a'"
+            >add_alert</mat-icon>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

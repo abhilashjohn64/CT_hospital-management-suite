@@ -11,7 +11,7 @@ import { DoctorService } from '../../services/doctor.service';
   styleUrls: ['./view-request.component.scss']
 })
 export class ViewRequestComponent implements OnInit {
-  displayedColumns: string[] = ['change','reason','replacement', 'time','status'];
+  displayedColumns: string[] = ['change','reason','replacement', 'time','status','operations'];
   changeRequestList : IChangeRequests[] = []
   dataSource!: MatTableDataSource<IChangeRequests[]>;
   constructor(private doctorService : DoctorService) { }
@@ -21,6 +21,11 @@ export class ViewRequestComponent implements OnInit {
     this.doctorService.getChangeRequest().subscribe(response =>{
       this.changeRequestList = response.data
       this.dataSource = new MatTableDataSource<IChangeRequests[]>(response.data);
+    })
+  }
+  sendRemainer(id : string){
+    this.doctorService.sendRemainder(id).subscribe(response =>{
+      console.log(response)
     })
   }
 

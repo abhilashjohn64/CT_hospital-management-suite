@@ -58,8 +58,6 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRequests();
-    console.log();
-
   }
   updateResponse(id: string, change: any): void {
     console.log(change)

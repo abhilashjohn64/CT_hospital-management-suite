@@ -14,7 +14,7 @@ export class DoctorService {
     return this.httpClient.get(`${environment.baseUrl}${endPoint}`,{params:queryParams})
   }
 
-  post(endPoint:string,data : IRequests){
+  post(endPoint:string,data ?: IRequests){
     return this.httpClient.post(`${environment.baseUrl}${endPoint}`,data)
   }
 
@@ -39,5 +39,8 @@ export class DoctorService {
     queryParams = queryParams.append('role', environment.roles.find(role=>role.title==="Nurse")?.roleId || "" );
     queryParams = queryParams.append('occupied', false );
     return this.get("user",queryParams)
+  }
+  sendRemainder(id:string): Observable<any>{
+    return this.post(`reminder/${id}`)
   }
 }

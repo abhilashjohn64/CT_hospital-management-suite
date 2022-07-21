@@ -34,7 +34,7 @@ export class HomePageComponent implements OnInit {
     this.getDoctorDetails();
     this.getUnAssignedNurses();
   }
-  
+
   getDoctorDetails() {
     this.doctorService.getDoctorDetails().subscribe((response) => {
       this.doctorDetails = response.data;
@@ -56,6 +56,12 @@ export class HomePageComponent implements OnInit {
   submitChangeRequest(request : IRequests){
     this.doctorService.postChangeRequest(request).subscribe(response =>{
       console.log(response);
+      this.sendRemainer(response.data._id)
+    })
+  }
+  sendRemainer(id : string){
+    this.doctorService.sendRemainder(id).subscribe(response =>{
+      console.log(response)
     })
   }
 

@@ -52,4 +52,8 @@ export class AdminService  {
   updateRequest(id: string, change: any) :Observable<any>{
     return this.patch(`change-request/${id}`,change)
   }
+
+  getRemainders() : Observable<any>{
+    return this.get("reminder")
+  }
 }

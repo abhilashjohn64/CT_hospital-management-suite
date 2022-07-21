@@ -38,3 +38,14 @@ export interface IStatusRequest{
   createdAt: string,
   updatedAt: string
 }
+
+export interface IRemainder        {
+  _id: string,
+  request: {
+      from: IUserData[]
+  },
+  deleted: boolean,
+  createdAt: string,
+  updatedAt: string,
+  __v: number
+}

@@ -46,6 +46,7 @@ export class SendMessageComponent implements OnInit {
   sendMessage(message : IMessageFormat){
     this.nurseService.sendMessage(message).subscribe(response=>{
       console.log(response)
+      this.form.controls['text'].reset();
     })
   }
 
@@ -55,7 +56,6 @@ export class SendMessageComponent implements OnInit {
         ...messageForm.value,
         to : this.nurseDetails.assignedDoctor?._id
       })
-      this.form.controls.text.setValue("");
     }
   }
 }

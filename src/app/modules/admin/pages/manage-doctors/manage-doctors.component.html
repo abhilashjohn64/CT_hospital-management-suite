@@ -7,9 +7,7 @@
     <div class="mat-elevation-z8">
       <div class="operations">
         <h2>List of Doctors</h2>
-        <app-button (buttonClick)="onCreateDoctor()" class="add-btn"
-          >Add Doctor</app-button
-        >
+        <app-custom-mat-icon (click)="onCreateDoctor()" class="add-btn">person_add</app-custom-mat-icon>
       </div>
 
       <table mat-table [dataSource]="dataSource" class="table">

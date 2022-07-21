@@ -56,7 +56,7 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let request" class="operations" >
             <mat-icon (click)="onAcceptRequest(request._id)"
-            *ngIf="request.status[0]._id=== '62d6482764edfa25d9e7072a'"
+            *ngIf="request.status[0]._id === '62d6482764edfa25d9e7072a'"
               >check_circle</mat-icon
             >
             <mat-icon (click)="onRejectRequest(request._id)"
